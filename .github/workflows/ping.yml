@@ -1,0 +1,41 @@
+name: Ping Render Apps
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    - name: Run ping script
+      env:
+        APP_URLS: ${{ secrets.APP_URLS }}
+      run: |
+        import requests
+        import os
+        import json
+        from datetime import datetime
+
+        urls = json.loads(os.environ['APP_URLS'])
+        for url in urls:
+            try:
+                response = requests.get(url)
+                print(f"{datetime.now()} - Pinged {url} - Status: {response.status_code}")
+            except Exception as e:
+                print(f"{datetime.now()} - Error pinging {url}: {str(e)}")
+      shell: python
