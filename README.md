@@ -22,7 +22,7 @@ This project uses GitHub Actions to automatically ping multiple applications hos
 
 ## Workflow File
 
-The `.github/workflows/ping.yml` file contains the GitHub Actions workflow definition. It's set to run every 10 minutes and can also be triggered manually.
+The `.github/workflows/main.yml` file contains the GitHub Actions workflow definition. It's set to run every 10 minutes and can also be triggered manually.
 
 ## Monitoring
 
@@ -31,7 +31,7 @@ The `.github/workflows/ping.yml` file contains the GitHub Actions workflow defin
 
 ## Customization
 
-- You can modify the schedule in the `.github/workflows/ping.yml` file.
+- You can modify the schedule in the `.github/workflows/main.yml` file.
 - To add or remove apps, update the `APP_URLS` secret in your repository settings.
 
 ## Contributing
